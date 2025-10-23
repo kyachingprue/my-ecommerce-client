@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+/* 🌿 For main website navbar */
+.main-nav a.active {
+  background-color: #1e40af; /* Deep blue */
+  color: white;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+/* 📦 For dashboard sidebar */
+.dashboard-nav a.active {
+  background-color: #34d36e;
+  color: white; /* Green shade matching your dashboard */
+  font-weight: 600;
+  border-radius: 4px;
+  display: block;
+  padding: 10px 4px 10px 4px;
+}
