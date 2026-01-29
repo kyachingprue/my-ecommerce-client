@@ -67,7 +67,7 @@ const Products = () => {
   return (
     <div className="pb-10">
       {/* ===== Banner Section ===== */}
-      <div className="relative bg-green-700 rounded-md pt-32 text-white py-20 overflow-hidden">
+      <div className="relative bg-green-700 rounded-md pt-32 text-white py-32 overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200"
           alt="banner"
