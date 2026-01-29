@@ -115,16 +115,24 @@ const ProductDetails = () => {
           ))}
         </div>
 
-        <button
-          onClick={handleAddToCart}
-          disabled={roleLoading || role === 'seller' || role === 'admin'}
-          className={`mt-6 px-6 py-3 text-xl font-bold rounded w-full md:w-auto transition ${role === 'seller' || role === 'admin'
-            ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-            : "bg-blue-300 text-black hover:bg-blue-400"
-            }`}
-        >
-          Add To Cart
-        </button>
+        <div className="flex flex-col md:flex-row items-center gap-5 px-4">
+          <button
+            onClick={handleAddToCart}
+            className='mt-6 px-6 py-3 text-xl font-bold rounded w-full md:w-auto transition bg-sky-300 text-gray-700 hover:bg-sky-800 hover:text-white'
+          >
+            Back products
+          </button>
+          <button
+            onClick={handleAddToCart}
+            disabled={roleLoading || role === 'seller' || role === 'admin'}
+            className={`mt-6 px-6 py-3 text-xl font-bold rounded w-full md:w-auto transition ${role === 'seller' || role === 'admin'
+              ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+              : "bg-blue-300 text-black hover:bg-blue-400"
+              }`}
+          >
+            Add To Cart
+          </button>
+        </div>
       </div>
     </div>
   );
