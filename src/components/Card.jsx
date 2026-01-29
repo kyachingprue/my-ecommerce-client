@@ -10,7 +10,10 @@ const Card = ({ product }) => {
     navigate(`/products/${product._id}`, { state: { product } });
   };
   return (
-    <div className='w-72 rounded-md border border-gray-300 p-2' onClick={handleClick}>
+    <div
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      className='w-64 rounded-md mx-auto border border-gray-300 p-2' onClick={handleClick}>
       <div >
         <img className='w-full h-44 object-cover rounded-md' src={image} alt="" />
       </div>
@@ -19,12 +22,12 @@ const Card = ({ product }) => {
         <div className='flex justify-between items-center'>
           <p className='py-1 px-5 rounded-full bg-blue-200 text-black text-center'>{category}</p>
           <div className='flex bg-green-200 text-black py-1 px-5 rounded-full items-center'>
-            <p>Price: {price}</p>
-            <p>{currency}</p>
+            <p className='text-sm flex items-center gap-1'>Price: {price}</p>
+            <p className='text-sm'>{currency}</p>
           </div>
         </div>
         <p className='text-sm text-black font-bold pt-2'>Seller Email:-</p>
-        <p className='text-sm pb-2'>{seller.email}</p>
+        <p className='text-sm text-gray-600 pb-2'>{seller.email}</p>
         <div>
           <StarRating rating={rating} />
         </div>

@@ -38,12 +38,12 @@ const SellerRequestsAdmin = () => {
 
   return (
     <div className="p-5 bg-cyan-100 shadow-2xl rounded-md">
-      <h2 className="text-2xl font-semibold mb-6 w-2/12 border-b border-gray-500 pb-2">
+      <h2 className="text-2xl text-black font-semibold mb-6 w-10/12 md:w-2/12 border-b border-gray-500 pb-2">
         Seller Requests
       </h2>
 
       {requests.length === 0 ? (
-        <p className="text-gray-500">No seller requests yet.</p>
+        <p className="text-gray-600">No seller requests yet.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full">
@@ -65,9 +65,9 @@ const SellerRequestsAdmin = () => {
                   key={req._id}
                   className="transition-colors hover:bg-gray-100 cursor-pointer"
                 >
-                  <td className="py-2 px-3">{req.name}</td>
-                  <td className="py-2 px-3">{req.email}</td>
-                  <td className="py-2 px-3">{req.message}</td>
+                  <td className="py-2 text-black px-3">{req.name}</td>
+                  <td className="py-2 text-black px-3">{req.email}</td>
+                  <td className="py-2 text-black px-3">{req.message}</td>
                   <td className="py-2 px-3 capitalize">
                     <span
                       className={`px-2 py-1 rounded text-white ${req.status === "approved"

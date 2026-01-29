@@ -36,7 +36,7 @@ const banners = [
 
 const Banner = () => {
   return (
-    <div className="relative rounded-md overflow-hidden h-[500px]">
+    <div className="relative rounded-md overflow-hidden mb-5 h-[500px]">
       <Swiper
         modules={[Navigation, Autoplay]}
         navigation={{
@@ -58,15 +58,15 @@ const Banner = () => {
                 height: "500px",
               }}
             >
-              <div className="bg-black bg-opacity-50 p-6 md:w-1/2 rounded-xl">
-                <h2 className="text-xl md:text-4xl font-bold mb-2">
+              <div data-aos="fade-up" className="bg-black bg-opacity-50 mt-20 md:mt-0 py-7 px-6 w-10/12 md:w-6/12 rounded-xl">
+                <h2 className="text-sm md:text-4xl font-bold mb-2">
                   {item.title}
                 </h2>
-                <p className="text-red-400 font-semibold text-lg mb-1">
+                <p className="text-red-400 font-semibold text-xl md:text-lg mb-1">
                   FROM <span className="text-red-500 text-3xl">${item.price}</span>
                 </p>
                 <p className="text-gray-200 mb-5">{item.desc}</p>
-                <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full font-medium transition">
+                <button className="bg-green-500 hover:bg-green-600 text-white px-3 md:px-5 py-1 md:py-2 rounded-full text-sm md:mb-0 md:ml-0 font-medium transition">
                   Check Products →
                 </button>
               </div>

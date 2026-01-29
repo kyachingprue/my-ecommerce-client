@@ -73,7 +73,7 @@ const AllSellers = () => {
       <h2 className="text-3xl font-bold text-gray-700 mb-6">All Sellers</h2>
 
       {sellers.length === 0 ? (
-        <p className="text-center text-gray-500 py-10">No sellers found.</p>
+        <p className="text-center text-gray-600 py-10">No sellers found.</p>
       ) : (
         <div className="overflow-x-auto bg-white shadow-lg rounded-2xl border border-gray-200">
           <table className="min-w-full text-left text-sm">
@@ -94,18 +94,18 @@ const AllSellers = () => {
                   className={`${idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } hover:bg-gray-100 transition-colors duration-200`}
                 >
-                  <td className="px-6 py-3 font-semibold">{idx + 1}</td>
+                  <td className="px-6 py-3 text-black font-semibold">{idx + 1}</td>
                   <td className="px-6 py-3 flex items-center gap-2">
                     <FaUserTie className="text-purple-500" />
-                    <span>{seller.email}</span>
+                    <span className="text-black">{seller.email}</span>
                   </td>
-                  <td className="px-6 py-3 capitalize font-semibold">
+                  <td className="px-6 py-3 text-black capitalize font-semibold">
                     {seller.role}
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-6 text-black py-3">
                     {new Date(seller.created_at).toLocaleString()}
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-6 text-black py-3">
                     {new Date(seller.lasted_login).toLocaleString()}
                   </td>
                   <td className="px-6 py-3 text-center flex justify-center gap-2">

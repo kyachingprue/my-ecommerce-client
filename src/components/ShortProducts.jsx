@@ -7,7 +7,7 @@ const ShortProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch('http://localhost:4000/products')
+    fetch('https://green-basket-blond.vercel.app/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data)

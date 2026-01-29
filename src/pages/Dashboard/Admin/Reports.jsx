@@ -58,7 +58,7 @@ const Reports = () => {
             <FaUserAlt size={24} />
           </div>
           <h3 className="text-lg font-semibold text-gray-700">Total Users</h3>
-          <p className="text-2xl font-bold">{users.length}</p>
+          <p className="text-2xl text-gray-600 font-bold">{users.length}</p>
         </div>
 
         {/* Total Sellers */}
@@ -67,7 +67,7 @@ const Reports = () => {
             <FaUserTie size={24} />
           </div>
           <h3 className="text-lg font-semibold text-gray-700">Total Sellers</h3>
-          <p className="text-2xl font-bold">{sellers.length}</p>
+          <p className="text-2xl text-gray-600 font-bold">{sellers.length}</p>
         </div>
 
         {/* Total Products */}
@@ -76,7 +76,7 @@ const Reports = () => {
             <FaBoxOpen size={24} />
           </div>
           <h3 className="text-lg font-semibold text-gray-700">Total Products</h3>
-          <p className="text-2xl font-bold">{products.length}</p>
+          <p className="text-2xl text-gray-600 font-bold">{products.length}</p>
         </div>
 
         {/* Total Revenue */}
@@ -85,7 +85,7 @@ const Reports = () => {
             <FaDollarSign size={24} />
           </div>
           <h3 className="text-lg font-semibold text-gray-700">Total Revenue</h3>
-          <p className="text-2xl font-bold">BDT {totalRevenue}</p>
+          <p className="text-2xl text-gray-600 font-bold">BDT {totalRevenue}</p>
         </div>
       </div>
 

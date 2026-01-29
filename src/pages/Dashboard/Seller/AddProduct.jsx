@@ -56,9 +56,9 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 px-4">
-      <div className="max-w-5xl mx-auto bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-green-200">
-        <h2 className="text-3xl font-extrabold text-center text-green-700 mb-8">
+    <div className="min-h-screen bg-gray-200 px-1 md:px-4">
+      <div className="w-11/12 md:w-10/12 mx-auto bg-white/90 backdrop-blur-md p-3 md:p-8 rounded-2xl shadow-2xl border border-green-200">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-center text-green-700 mb-8">
           🌿 Add New Product
         </h2>
 
@@ -245,9 +245,9 @@ const AddProduct = () => {
           <div className="md:col-span-2 mt-6">
             <button
               type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-lg tracking-wide shadow-lg transition-transform transform hover:scale-[1.02]"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-md md:text-lg tracking-wide shadow-lg transition-transform transform hover:scale-[1.02]"
             >
-              ➕ Add Product
+              🌿 Add Product
             </button>
           </div>
         </form>

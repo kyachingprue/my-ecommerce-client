@@ -5,9 +5,9 @@ import useTitle from "../Hooks/useTitle";
 const About = () => {
   useTitle('About-')
   return (
-    <div className=" bg-blue-100 dark:bg-gray-600 text-gray-800 dark:text-white py-12 px-6 md:px-16">
+    <div className=" bg-blue-100 text-gray-800 dark:text-white py-12 px-6 md:px-16">
       {/* 🌿 Hero Section */}
-      <div className="text-center mb-10">
+      <div data-aos="fade-up" data-aos-duration="1000" className="text-center mb-10">
         <h1 className="text-4xl font-bold text-black mb-4">
           About Our Vegetable Store
         </h1>
@@ -20,7 +20,7 @@ const About = () => {
       </div>
 
       {/* 💚 Mission Section */}
-      <div className="grid md:grid-cols-2 gap-10 items-center">
+      <div data-aos="fade-up" data-aos-duration="1000" className="grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h2 className="text-2xl font-semibold mb-3 text-black">
             Our Mission
@@ -42,25 +42,25 @@ const About = () => {
 
       {/* 📊 Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-14 text-center">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+        <div data-aos="fade-up" data-aos-duration="1000" className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
           <FaLeaf className="text-green-500 text-3xl mx-auto mb-2" />
           <h3 className="text-2xl font-bold">150+</h3>
           <p className="text-gray-500 dark:text-gray-400">Fresh Products</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+        <div data-aos="fade-up" data-aos-duration="2000" className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
           <FaStore className="text-green-500 text-3xl mx-auto mb-2" />
           <h3 className="text-2xl font-bold">35+</h3>
           <p className="text-gray-500 dark:text-gray-400">Local Sellers</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+        <div data-aos="fade-up" data-aos-duration="3000" className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
           <FaUsers className="text-green-500 text-3xl mx-auto mb-2" />
           <h3 className="text-2xl font-bold">1200+</h3>
           <p className="text-gray-500 dark:text-gray-400">Happy Customers</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
+        <div data-aos="fade-up" data-aos-duration="4000" className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
           <FaTruck className="text-green-500 text-3xl mx-auto mb-2" />
           <h3 className="text-2xl font-bold">Fast</h3>
           <p className="text-gray-500 dark:text-gray-400">Delivery Service</p>
@@ -68,7 +68,7 @@ const About = () => {
       </div>
 
       {/* 🌱 Footer Message */}
-      <div className="text-center mt-16">
+      <div data-aos="fade-up" data-aos-duration="1000" className="text-center mt-16">
         <h3 className="text-xl font-semibold text-black mb-2">
           “Eat Fresh, Live Green 🌿”
         </h3>

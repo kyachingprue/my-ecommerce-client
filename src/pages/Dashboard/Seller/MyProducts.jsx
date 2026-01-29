@@ -74,8 +74,8 @@ const MyProducts = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-200 py-5 px-4">
-      <div className="max-w-6xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden border border-green-200">
+    <div className="h-full bg-gray-200 py-10 px-4">
+      <div className="w-11/12 mx-auto bg-white shadow-2xl rounded-md overflow-hidden border border-green-200">
         <div className="flex items-center justify-between px-6 py-4 border-b border-green-100">
           <h2 className="text-3xl font-extrabold text-green-700 tracking-tight">
             My Products
@@ -128,8 +128,8 @@ const MyProducts = () => {
                     <td className="px-6 py-4 font-semibold text-green-700">
                       {product.price} {product.currency}
                     </td>
-                    <td className="px-6 py-4">{product.stock}</td>
-                    <td className="px-6 py-4">{product.currency}</td>
+                    <td className="px-6 text-blue-950 py-4">{product.stock}</td>
+                    <td className="px-6 text-black py-4">{product.currency}</td>
                     <td className="px-6 py-5 flex justify-center gap-3">
                       <button
                         onClick={() => navigate(`/dashboard/seller/edit-product/${product._id}`)}

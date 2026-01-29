@@ -22,18 +22,18 @@ const PaymentHistory = () => {
 
   return (
     <div className="overflow-x-auto bg-gray-200 p-4">
-      <h2 className="text-xl font-semibold mb-4">Payment History</h2>
+      <h2 className="text-xl text-black font-semibold mb-4">Payment History</h2>
 
       <table className="table w-full border border-gray-200">
         <thead className="bg-gray-100">
           <tr>
-            <th>#</th>
-            <th>Product Title</th>
-            <th>Amount</th>
-            <th>ProductId</th>
-            <th>User Email</th>
-            <th>Status</th>
-            <th>Date</th>
+            <th className='text-black'>#</th>
+            <th className='text-black'>Product Title</th>
+            <th className='text-black'>Amount</th>
+            <th className='text-black'>ProductId</th>
+            <th className='text-black'>User Email</th>
+            <th className='text-black'>Status</th>
+            <th className='text-black'>Date</th>
           </tr>
         </thead>
 
@@ -41,11 +41,11 @@ const PaymentHistory = () => {
           {payments.length > 0 ? (
             payments.map((item, index) => (
               <tr key={item._id} className="hover:bg-gray-50">
-                <td>{index + 1}</td>
-                <td>{item.title}</td>
-                <td>{item.amount} TK</td>
-                <td>{item.productId}</td>
-                <td>{item.user_email}</td>
+                <td className='text-black'>{index + 1}</td>
+                <td className='text-black'>{item.title}</td>
+                <td className='text-black'>{item.amount} TK</td>
+                <td className='text-black'>{item.productId}</td>
+                <td className='text-cyan-800'>{item.user_email}</td>
                 <td>
                   <span
                     className={`px-2 py-1 rounded text-white ${item.status === "succeeded"
@@ -56,7 +56,7 @@ const PaymentHistory = () => {
                     {item.status}
                   </span>
                 </td>
-                <td>
+                <td className='text-black'>
                   {new Date(item.createdAt_string).toLocaleString("en-BD", {
                     dateStyle: "medium",
                     timeStyle: "short",

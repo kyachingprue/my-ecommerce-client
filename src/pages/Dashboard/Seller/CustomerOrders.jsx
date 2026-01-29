@@ -38,8 +38,8 @@ const CustomerOrders = () => {
 
   return (
     <div className="min-h-screen bg-gray-200 py-6 px-4">
-      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-6">
-        <h2 className="text-3xl font-bold text-green-700 mb-6">Customer Orders</h2>
+      <div className="w-11/12 md:w-10/12 mx-auto bg-white rounded-md shadow-lg p-2 md:p-6">
+        <h2 className="text-xl md:text-3xl font-bold text-green-700 mb-2 md:mb-6">Customer Orders</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
             <thead className="bg-green-600 text-white uppercase text-xs tracking-wider">
@@ -59,10 +59,10 @@ const CustomerOrders = () => {
                   key={order._id}
                   className={idx % 2 === 0 ? "bg-green-50" : "bg-white"}
                 >
-                  <td className="px-4 py-2 font-bold">{idx + 1}</td>
-                  <td className="px-4 py-2">{order.user_email}</td>
-                  <td className="px-4 py-2 font-semibold">{order.productTitle}</td>
-                  <td className="px-4 py-2">{order.quantity || 1}</td>
+                  <td className="px-4 py-2 text-black font-bold">{idx + 1}</td>
+                  <td className="px-4 text-black py-2">{order.user_email}</td>
+                  <td className="px-4 text-cyan-800 py-2 font-semibold">{order.productTitle}</td>
+                  <td className="px-4 text-black py-2">{order.quantity || 1}</td>
                   <td className="px-4 py-2 font-semibold text-green-700">
                     ${order.price}
                   </td>
@@ -70,7 +70,7 @@ const CustomerOrders = () => {
                   {/* Display current status */}
                   <td className="px-4 py-2">
                     <span
-                      className={`px-2 py-1 rounded-lg text-white ${order.status === "delivered"
+                      className={`px-2 py-1 rounded-lg text-gray-700 ${order.status === "delivered"
                         ? "bg-green-600"
                         : order.status === "shipped"
                           ? "bg-blue-600"

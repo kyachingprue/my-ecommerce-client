@@ -3,7 +3,6 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import { FaUserCircle } from "react-icons/fa";
-import LoadingSpinner from "./LoadingSpinner";
 import useRole from "../Hooks/useRole";
 import { CiLogout } from "react-icons/ci";
 
@@ -13,7 +12,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { role, roleLoading } = useRole();
+  const { role, } = useRole();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,10 +38,6 @@ const Navbar = () => {
     return "/dashboard/orders";
   };
 
-  if (roleLoading) {
-    return <LoadingSpinner></LoadingSpinner>
-  }
-
   const handleSearch = () => {
     // navigate to products page with query as URL param
     if (searchQuery.trim()) {
@@ -54,7 +49,7 @@ const Navbar = () => {
   return (
     <div className="mb-20">
       <div
-        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto px-2 items-center justify-between md:justify-baseline rounded-md shadow-2xl py-5 duration-300 ${isScrolled ? "bg-black shadow-md" : "bg-black"
+        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto px-2 items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl py-5 duration-300 ${isScrolled ? "bg-black shadow-md" : "bg-black"
           }`}
       >
         {/* Mobile Dropdown */}
@@ -81,18 +76,18 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 main-nav rounded-box z-1 mt-3 w-36 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-white main-nav rounded-box z-1 mt-3 w-36 p-2 shadow"
           >
-            <h3 className="text-blue-900 block text-md md:hidden font-medium py-2 px-2">
+            <h3 className="text-black block text-md md:hidden font-medium py-2 px-2">
               GreenBasket
             </h3>
-            <li>
+            <li className="text-gray-600">
               <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
             </li>
-            <li>
+            <li className="text-gray-600">
               <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>Products</NavLink>
             </li>
-            <li>
+            <li className="text-gray-600">
               <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
             </li>
           </ul>
@@ -101,8 +96,8 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/">
           <div className="flex items-center">
-            <p className="text-4xl">🌿</p>
-            <h3 className="text-blue-200 hidden md:block text-xl md:text-2xl lg:text-3xl font-medium">
+            <p className="text-xl md:text-4xl">🌿</p>
+            <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-medium">
               GreenBasket
             </h3>
           </div>
@@ -175,7 +170,7 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               {menuOpen && (
-                <div className="absolute right-0 mt-3 w-40 bg-white shadow-lg rounded-lg p-2">
+                <div className="absolute right-7 mt-3 w-40 bg-white shadow-lg rounded-lg p-2">
                   <p className="text-center text-sm font-bold text-white rounded-md px-2 bg-cyan-950 border-b pb-1 ">
                     {user.displayName || "User"}
                   </p>
@@ -214,7 +209,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to="/login" className="btn btn-accent text-sm">
-              Login/Register
+              Login
             </Link>
           )}
         </div>

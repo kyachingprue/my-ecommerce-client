@@ -78,7 +78,7 @@ const MyOrders = () => {
       </h2>
 
       {orders.length === 0 ? (
-        <p className="text-center text-gray-500">No orders found!</p>
+        <p className="text-center text-gray-600">No orders found!</p>
       ) : (
         <div className="min-w-full">
           <table className="table-auto w-full border border-gray-200 rounded-lg shadow-sm">
@@ -100,7 +100,7 @@ const MyOrders = () => {
                   key={order._id}
                   className="hover:bg-gray-50 text-sm md:text-base"
                 >
-                  <td className="p-2 text-center">{index + 1}</td>
+                  <td className="p-2 text-black text-center">{index + 1}</td>
                   <td className="p-2 text-center">
                     <img
                       src={order.image}
@@ -108,10 +108,10 @@ const MyOrders = () => {
                       className="w-12 h-12 md:w-16 md:h-16 rounded object-cover mx-auto"
                     />
                   </td>
-                  <td className="p-2 font-semibold">{order.title}</td>
-                  <td className="p-2">{order._id}</td>
-                  <td className="p-2">{order.price} {order.currency}</td>
-                  <td className="p-2">{order.seller_email}</td>
+                  <td className="p-2 text-black font-semibold">{order.title}</td>
+                  <td className="p-2 text-black">{order._id}</td>
+                  <td className="p-2 text-black">{order.price} {order.currency}</td>
+                  <td className="p-2 text-black">{order.seller_email}</td>
                   <td className="p-2">
                     <span
                       className={`px-3 py-1 text-xs md:text-sm font-semibold rounded-full ${order.order_status === "paid"

@@ -5,7 +5,7 @@ const ContactNewsletter = () => {
   return (
     <div className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Call Us Section */}
-      <div className="flex items-center gap-6 bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+      <div data-aos="fade-up" data-aos-duration="1000" className="flex items-center gap-6 bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div className="border-2 border-dotted border-orange-500 rounded-full p-4">
           <FaPhoneAlt className="text-4xl text-orange-500" />
         </div>
@@ -17,7 +17,7 @@ const ContactNewsletter = () => {
       </div>
 
       {/* Subscribe Section */}
-      <div className="flex items-center gap-6 bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+      <div data-aos="fade-up" data-aos-duration="2000" className="flex items-center gap-6 bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
         <div className="border-2 border-dotted border-orange-500 rounded-full p-4">
           <HiOutlineMail className="text-4xl text-orange-500" />
         </div>

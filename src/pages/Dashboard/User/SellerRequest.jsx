@@ -44,30 +44,30 @@ const SellerRequest = () => {
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-cyan-100 shadow-2xl rounded-md mt-8">
-      <h2 className="text-2xl font-bold mb-4 text-center">Become a Seller 🌱</h2>
+      <h2 className="text-2xl font-bold text-black mb-4 text-center">Become a Seller 🌱</h2>
       <form onSubmit={handleSellerRequest} className="space-y-4">
         <div>
-          <label className="block mb-1 text-sm font-medium">Full Name</label>
+          <label className="block mb-1 text-black text-sm font-medium">Full Name</label>
           <input
             type="text"
             value={user?.displayName || ""}
             disabled
-            className="w-full p-2 rounded-md border border-gray-300 bg-gray-100 cursor-not-allowed"
+            className="w-full p-2 text-gray-700 rounded-md border border-gray-300 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
         <div>
-          <label className="block mb-1 text-sm font-medium">Email</label>
+          <label className="block mb-1 text-black text-sm font-medium">Email</label>
           <input
             type="email"
             value={user?.email || ""}
             disabled
-            className="w-full p-2 rounded-md border border-gray-300 bg-gray-100 cursor-not-allowed"
+            className="w-full p-2 text-gray-700 rounded-md border border-gray-300 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
         <div>
-          <label className="block mb-1 text-sm font-medium">
+          <label className="block mb-1 text-sm text-black font-medium">
             Why do you want to become a seller?
           </label>
           <textarea
@@ -76,7 +76,7 @@ const SellerRequest = () => {
             rows={4}
             required
             placeholder="Write your request message..."
-            className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full p-2 rounded-md border text-gray-700 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
           ></textarea>
         </div>
 

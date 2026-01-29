@@ -28,6 +28,8 @@ const ServiceFeatures = () => {
     <div className="bg-orange-50 rounded-2xl py-8 px-4 mb-10 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0 shadow-sm">
       {features.map((feature, index) => (
         <div
+          data-aos="fade-up"
+          data-aos-duration="1000"
           key={index}
           className="flex items-center gap-4 text-center md:text-left"
         >

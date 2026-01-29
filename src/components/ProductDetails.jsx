@@ -64,7 +64,7 @@ const ProductDetails = () => {
   return (
     <div className="w-full bg-gray-100 justify-between items-center mx-auto p-6 grid md:grid-cols-2 px-5">
       {/* Product Image */}
-      <div className="flex w-[620px] justify-center items-center">
+      <div className="flex w-full md:w-[620px] justify-center items-center">
         <img
           src={product.image}
           alt={product.title}
@@ -74,7 +74,7 @@ const ProductDetails = () => {
 
       {/* Product Info */}
       <div className="flex flex-col justify-start">
-        <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
+        <h1 className="text-3xl font-bold pt-6 md:pt-0 text-gray-800">{product.title}</h1>
         <p className="text-gray-500 mt-1">{product.category}</p>
 
         <div className="flex items-center mt-2 gap-4">
@@ -101,7 +101,7 @@ const ProductDetails = () => {
 
         <div className="mt-4">
           <p className="text-gray-700 font-semibold">Description:</p>
-          <p className="text-gray-600">{product.description}</p>
+          <p className="text-gray-600 w-full overflow-hidden">{product.description}</p>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">

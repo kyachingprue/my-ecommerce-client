@@ -92,15 +92,15 @@ const AllUsers = () => {
                   className={`${idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } hover:bg-gray-100 transition-colors duration-200`}
                 >
-                  <td className="px-6 py-3 font-semibold">{idx + 1}</td>
-                  <td className="px-6 py-3">{user.email}</td>
-                  <td className="px-6 py-3 capitalize font-semibold">
+                  <td className="px-6 text-black py-3 font-semibold">{idx + 1}</td>
+                  <td className="px-6 text-black py-3">{user.email}</td>
+                  <td className="px-6 text-black py-3 capitalize font-semibold">
                     {user.role}
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-6 text-black py-3">
                     {new Date(user.created_at).toLocaleString()}
                   </td>
-                  <td className="px-6 py-3">
+                  <td className="px-6 text-black py-3">
                     {new Date(
                       user.last_login || user.lasted_login
                     ).toLocaleString()}

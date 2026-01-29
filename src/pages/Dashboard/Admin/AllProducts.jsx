@@ -102,7 +102,7 @@ const AllProducts = () => {
                   className={`${idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } hover:bg-gray-100 transition-colors duration-200`}
                 >
-                  <td className="px-6 py-3 font-semibold">{idx + 1}</td>
+                  <td className="px-6 py-3 text-black font-semibold">{idx + 1}</td>
                   <td className="px-6 py-3">
                     <img
                       src={product.image}
@@ -114,14 +114,14 @@ const AllProducts = () => {
                     <FaBoxOpen className="text-green-500" />
                     {product.title}
                   </td>
-                  <td className="px-6 py-3">{product.category}</td>
-                  <td className="px-6 py-3 flex items-center gap-1 font-medium">
+                  <td className="px-6 text-black py-3">{product.category}</td>
+                  <td className="px-6 py-3 text-black flex items-center gap-1 font-medium">
                     <span> {product.price}</span> {product.currency}
                   </td>
-                  <td className="px-6 py-3">{product.stock}</td>
-                  <td className="px-6 py-3">{product.sku}</td>
-                  <td className="px-6 py-3">{product.weight}</td>
-                  <td className="px-6 py-3">{product.origin}</td>
+                  <td className="px-6 text-black py-3">{product.stock}</td>
+                  <td className="px-6 text-black py-3">{product.sku}</td>
+                  <td className="px-6 text-black py-3">{product.weight}</td>
+                  <td className="px-6 text-black py-3">{product.origin}</td>
                   <td className="px-6 py-3 text-center flex justify-center items-center gap-2">
                     <button
                       onClick={() => handleUpdate(product._id)}

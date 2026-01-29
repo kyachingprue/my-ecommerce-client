@@ -51,28 +51,28 @@ const ProductTracking = () => {
 
   return (
     <div className="p-4 bg-gray-200">
-      <h2 className="text-2xl font-bold mb-6">Product Tracking Dashboard</h2>
+      <h2 className="text-2xl text-black font-bold mb-6">Product Tracking Dashboard</h2>
 
       {trackedProducts.length === 0 ? (
-        <p className="text-gray-500">No products purchased yet.</p>
+        <p className="text-gray-600">No products purchased yet.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                   Product
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                   Price
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                   Payment Status
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                   Order Status
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
                   Payment Date
                 </th>
               </tr>
@@ -101,7 +101,7 @@ const ProductTracking = () => {
                       {item.paymentStatus === "succeeded" ? "succeeded" : "Failed"}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 text-cyan-800 py-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-semibold ${getOrderStatusClass(
                         item.orderStatus
@@ -110,7 +110,7 @@ const ProductTracking = () => {
                       {item.orderStatus.charAt(0).toUpperCase() + item.orderStatus.slice(1)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-gray-500 text-sm">
+                  <td className="px-6 py-4 text-gray-600 text-sm">
                     {new Date(item.createdAt).toLocaleString()}
                   </td>
                 </tr>
