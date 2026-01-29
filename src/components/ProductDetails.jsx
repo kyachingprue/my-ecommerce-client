@@ -117,7 +117,7 @@ const ProductDetails = () => {
 
         <div className="flex flex-col md:flex-row items-center gap-5 px-4">
           <button
-            onClick={handleAddToCart}
+            onClick={() => navigate(-1)}
             className='mt-6 px-6 py-3 text-xl font-bold rounded w-full md:w-auto transition bg-sky-300 text-gray-700 hover:bg-sky-800 hover:text-white'
           >
             Back products
