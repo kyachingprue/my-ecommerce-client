@@ -27,8 +27,8 @@ const banners = [
   },
   {
     id: 4,
-    title: "Fresh vegetables",
-    price: 17.34,
+    title: "Fresh vegetables from farm",
+    price: 18.50,
     desc: "Eat fresh, stay healthy — nature’s best delivered to you.",
     img: "https://i.ibb.co.com/wFFxnTY8/broccoli-green-background-829282730.jpg", // pepper image
   },
