@@ -67,7 +67,7 @@ const Products = () => {
   return (
     <div className="py-10">
       {/* ===== Banner Section ===== */}
-      <div className="relative bg-green-700 rounded-md mt-12 text-white py-12 h-80 overflow-hidden">
+      <div className="relative bg-green-700 rounded-md text-white py-12 h-80 overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200"
           alt="banner"
@@ -78,7 +78,7 @@ const Products = () => {
             initial={{ y: -40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
+            className="text-4xl md:text-5xl font-extrabold drop-shadow-lg"
           >
             {searchQuery
               ? `Search Results for "${searchQuery}"`
