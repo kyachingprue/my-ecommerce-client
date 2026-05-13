@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <div className="mb-20">
       <div
-        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto px-2 items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl py-5 duration-300 ${isScrolled ? "bg-black shadow-md" : "bg-black"
+        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl px-0 md:px-3 py-3 duration-300 ${isScrolled ? "bg-black shadow-md" : "bg-black"
           }`}
       >
         {/* Mobile Dropdown */}
@@ -61,7 +61,7 @@ const Navbar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
+              className="h-9 w-9"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -161,7 +161,7 @@ const Navbar = () => {
                   <img
                     src={user.photoURL}
                     alt="User"
-                    className="w-12 h-12 object-cover mr-8 rounded-full border-2 border-green-400"
+                    className="w-12 h-12 object-cover md:mr-8 rounded-full border-2 border-green-400"
                   />
                 ) : (
                   <FaUserCircle className="text-5xl mr-4 text-white" />

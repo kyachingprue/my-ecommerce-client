@@ -3,9 +3,13 @@ import React, { useEffect } from "react";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: 'https://green-basket-serverweb.vercel.app' ,
+  baseURL:
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:5173'
+      : 'https://green-basket-serverweb.vercel.app',
+
   withCredentials: true
-})
+});
 
 const useAxiosSecure = () => {
   const { user } = useAuth();

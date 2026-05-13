@@ -4,7 +4,7 @@ const Brands = () => {
   return (
     <div>
       <h2 className='text-black text-xl font-bold'>Shop By Brands</h2>
-      <div className='flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-center md:justify-between pt-5 pb-10'>
+      <div className=' grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 px-4 gap-4 items-center justify-center md:justify-between pt-5 pb-10'>
         <div
           data-aos="flip-up"
           data-aos-duration="1000"

@@ -7,6 +7,7 @@ import HeroBanner from '../components/HeroBanner';
 import ServiceFeatures from '../components/ServiceFeatures';
 import ContactNewsletter from '../components/ContactNewsletter';
 import useTitle from '../Hooks/useTitle';
+import HomeBottomCTA from '../components/HomeBottomCTA';
 
 const Home = () => {
   useTitle("home -")
@@ -19,6 +20,7 @@ const Home = () => {
       <HeroBanner></HeroBanner>
       <ServiceFeatures></ServiceFeatures>
       <ContactNewsletter></ContactNewsletter>
+      <HomeBottomCTA/>
     </div>
   );
 };
