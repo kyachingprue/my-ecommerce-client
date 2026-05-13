@@ -90,7 +90,7 @@ const DashboardLayout = () => {
 
       {/* ===== Sidebar ===== */}
       <aside
-        className={`fixed top-0 left-0 h-full w-72 lg:w-64 bg-green-600 text-white z-30 transform transition-transform duration-300 ease-in-out
+        className={`fixed top-0 left-0 h-full w-72 lg:w-64 bg-green-950 text-white z-30 transform transition-transform duration-300 ease-in-out
         ${drawerOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         {/* Brand */}
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-4 py-3 rounded-md mx-2 transition-colors text-sm ${isActive
                       ? "bg-green-700/90 shadow-md font-semibold"
-                      : "hover:bg-green-700/60"
+                      : "hover:bg-green-700/50"
                     }`
                   }
                 >
