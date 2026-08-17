@@ -68,6 +68,7 @@ const ProductDetails = () => {
         <img
           src={product.image}
           alt={product.title}
+          loading="lazy"
           className="w-full h-96 max-h-[400px] object-cover rounded shadow-lg"
         />
       </div>

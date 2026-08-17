@@ -15,7 +15,7 @@ const Card = ({ product }) => {
       data-aos-duration="1000"
       className='w-full md:w-64 rounded-md mx-auto border border-gray-300 p-2' onClick={handleClick}>
       <div >
-        <img className='w-full h-56 md:h-44 object-cover rounded-md' src={image} alt="" />
+        <img className='w-full h-56 md:h-44 object-cover rounded-md' loading='lazy' src={image} alt="" />
       </div>
       <div>
         <h2 className='text-xl font-medium text-black py-3'>{title}</h2>

@@ -47,17 +47,18 @@ const Navbar = () => {
   };
 
   return (
-    <div className="mb-20">
+    <div className="pb-20">
       <div
-        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl px-0 md:px-3 py-3 duration-300 ${isScrolled ? "bg-black shadow-md" : "bg-black"
-          }`}
+        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl px-2 md:px-4 py-3 duration-300 ${
+          isScrolled ? 'bg-white/90 shadow-md' : 'bg-white'
+        }`}
       >
         {/* Mobile Dropdown */}
         <div className="dropdown">
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost text-white lg:hidden"
+            className="btn btn-ghost text-black lg:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,13 +83,28 @@ const Navbar = () => {
               GreenBasket
             </h3>
             <li className="text-gray-600">
-              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Home
+              </NavLink>
             </li>
             <li className="text-gray-600">
-              <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>Products</NavLink>
+              <NavLink
+                to="/products"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Products
+              </NavLink>
             </li>
             <li className="text-gray-600">
-              <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
+              <NavLink
+                to="/about"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                About
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -97,27 +113,42 @@ const Navbar = () => {
         <Link to="/">
           <div className="flex items-center">
             <p className="text-xl md:text-4xl">🌿</p>
-            <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-medium">
+            <h3 className="text-black text-xl md:text-2xl lg:text-3xl font-serif font-bold">
               GreenBasket
             </h3>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="w-full hidden md:block ">
+        <div className="w-full px-5 hidden md:block ">
           <div className="flex items-center w-full">
-            <ul className="flex items-center gap-3 main-nav text-gray-200 px-4 text-sm">
+            <ul className="flex items-center gap-5 main-nav text-gray-600 font-serif px-4 text-sm md:text-base">
               <li>
-                <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>Products</NavLink>
+                <NavLink
+                  to="/products"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Products
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  About
+                </NavLink>
               </li>
             </ul>
-            <div className="flex w-full items-center px-4">
+            <div className="flex w-full md:w-120 mx-auto items-center px-4">
               <label className="input w-full">
                 <svg
                   className="h-[1em] opacity-50"
@@ -135,10 +166,18 @@ const Navbar = () => {
                     <path d="m21 21-4.3-4.3"></path>
                   </g>
                 </svg>
-                <input type="search" value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)} required placeholder="Search" />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  required
+                  placeholder="Search"
+                  className="outline-none"
+                />
               </label>
-              <button onClick={handleSearch} className="btn btn-info">Search</button>
+              <button onClick={handleSearch} className="btn btn-info active:scale-95 text-sm md:text-base ml-4">
+                Search
+              </button>
             </div>
           </div>
         </div>
@@ -172,26 +211,42 @@ const Navbar = () => {
               {menuOpen && (
                 <div className="absolute right-7 mt-3 w-40 bg-white shadow-lg rounded-lg p-2">
                   <p className="text-center text-sm font-bold text-white rounded-md px-2 bg-cyan-950 border-b pb-1 ">
-                    {user.displayName || "User"}
+                    {user.displayName || 'User'}
                   </p>
                   <ul className="mt-2 space-y-1 px-5 text-gray-700 text-sm">
                     <li className="mt-2">
-                      <Link to="/" className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md" onClick={() => setMenuOpen(false)}>
+                      <Link
+                        to="/"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md"
+                        onClick={() => setMenuOpen(false)}
+                      >
                         Home
                       </Link>
                     </li>
                     <li className="mt-2">
-                      <Link to="/products" className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-6 rounded-md" onClick={() => setMenuOpen(false)}>
+                      <Link
+                        to="/products"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-6 rounded-md"
+                        onClick={() => setMenuOpen(false)}
+                      >
                         Products
                       </Link>
                     </li>
                     <li className="mt-2">
-                      <Link to="/about" className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md" onClick={() => setMenuOpen(false)}>
+                      <Link
+                        to="/about"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md"
+                        onClick={() => setMenuOpen(false)}
+                      >
                         About
                       </Link>
                     </li>
                     <li className="mt-2">
-                      <Link to={getDashboardLink()} className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-5 rounded-md" onClick={() => setMenuOpen(false)}>
+                      <Link
+                        to={getDashboardLink()}
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-5 rounded-md"
+                        onClick={() => setMenuOpen(false)}
+                      >
                         Dashboard
                       </Link>
                     </li>
@@ -200,7 +255,10 @@ const Navbar = () => {
                         onClick={handleLogout}
                         className="text-blue-700 flex items-center gap-1 font-bold py-1 px-5 border hover:bg-cyan-800 hover:text-white border-gray-200 rounded-md"
                       >
-                        <span><CiLogout className="text-xl" /></span> Logout
+                        <span>
+                          <CiLogout className="text-xl" />
+                        </span>{' '}
+                        Logout
                       </button>
                     </li>
                   </ul>
@@ -208,14 +266,19 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <Link to="/login" className="btn btn-accent text-sm">
-              Login
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link to="/login" className="btn btn-accent active:scale-95 text-sm md:text-base">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-info active:scale-95 text-sm md:text-base">
+                Register
+              </Link>
+            </div>
           )}
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Navbar;
