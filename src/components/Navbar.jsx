@@ -186,7 +186,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2 md:gap-4 relative">
           {/* Cart Icon */}
           <Link to={getDashboardLink()}>
-            <MdAddShoppingCart className="text-2xl md:text-3xl text-white" />
+            <MdAddShoppingCart className="text-2xl md:text-3xl text-cyan-900" />
           </Link>
 
           {/* ✅ User Login Condition */}
@@ -200,10 +200,11 @@ const Navbar = () => {
                   <img
                     src={user.photoURL}
                     alt="User"
+                    loading="lazy"
                     className="w-12 h-12 object-cover md:mr-8 rounded-full border-2 border-green-400"
                   />
                 ) : (
-                  <FaUserCircle className="text-5xl mr-4 text-white" />
+                  <FaUserCircle className="text-5xl mr-4 text-blue-800" />
                 )}
               </button>
 
@@ -217,7 +218,7 @@ const Navbar = () => {
                     <li className="mt-2">
                       <Link
                         to="/"
-                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md"
+                        className="border hover:bg-cyan-700 hover:text-black border-gray-200 px-8 rounded-md"
                         onClick={() => setMenuOpen(false)}
                       >
                         Home
