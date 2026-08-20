@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <div className="pb-20">
       <div
-        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto items-center justify-center gap-7 md:gap-0 md:justify-baseline rounded-md shadow-2xl px-2 md:px-4 py-3 duration-300 ${
+        className={`fixed w-full top-0 left-0 z-50 transition-all flex mx-auto items-center justify-between gap-2 md:gap-0 md:justify-baseline rounded-md shadow-2xl px-2 md:px-4 py-3 duration-300 ${
           isScrolled ? 'bg-white/90 shadow-md' : 'bg-white'
         }`}
       >
@@ -183,7 +183,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-2 md:gap-4 relative">
+        <div className="flex items-center gap-5 md:gap-4 relative">
           {/* Cart Icon */}
           <Link to={getDashboardLink()}>
             <MdAddShoppingCart className="text-2xl md:text-3xl text-cyan-900" />
@@ -196,9 +196,9 @@ const Navbar = () => {
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="focus:outline-none"
               >
-                {user.photoURL ? (
+                {user?.photoURL ? (
                   <img
-                    src={user.photoURL}
+                    src={user?.photoURL}
                     alt="User"
                     loading="lazy"
                     className="w-12 h-12 object-cover md:mr-8 rounded-full border-2 border-green-400"
@@ -210,15 +210,15 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               {menuOpen && (
-                <div className="absolute right-7 mt-3 w-40 bg-white shadow-lg rounded-lg p-2">
-                  <p className="text-center text-sm font-bold text-white rounded-md px-2 bg-cyan-950 border-b pb-1 ">
+                <div className="absolute right-7 mt-3 w-40 bg-white flex flex-col h-[280px] shadow-lg rounded-lg p-2 border border-cyan-500">
+                  <p className="text-center text-sm font-bold text-white rounded-md px-2 py-2 bg-cyan-950 border-b mb-2 ">
                     {user.displayName || 'User'}
                   </p>
-                  <ul className="mt-2 space-y-1 px-5 text-gray-700 text-sm">
-                    <li className="mt-2">
+                  <ul className="mt-2 space-y-4 px-5 text-gray-700 text-sm">
+                    <li>
                       <Link
                         to="/"
-                        className="border hover:bg-cyan-700 hover:text-black border-gray-200 px-8 rounded-md"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 py-1.5 rounded-md"
                         onClick={() => setMenuOpen(false)}
                       >
                         Home
@@ -227,7 +227,7 @@ const Navbar = () => {
                     <li className="mt-2">
                       <Link
                         to="/products"
-                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-6 rounded-md"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-6 py-1.5 rounded-md"
                         onClick={() => setMenuOpen(false)}
                       >
                         Products
@@ -236,7 +236,7 @@ const Navbar = () => {
                     <li className="mt-2">
                       <Link
                         to="/about"
-                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 rounded-md"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-8 py-1.5 rounded-md"
                         onClick={() => setMenuOpen(false)}
                       >
                         About
@@ -245,7 +245,7 @@ const Navbar = () => {
                     <li className="mt-2">
                       <Link
                         to={getDashboardLink()}
-                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-5 rounded-md"
+                        className="border hover:bg-cyan-700 hover:text-white border-gray-200 px-4 py-1.5 rounded-md"
                         onClick={() => setMenuOpen(false)}
                       >
                         Dashboard
@@ -254,7 +254,7 @@ const Navbar = () => {
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="text-blue-700 flex items-center gap-1 font-bold py-1 px-5 border hover:bg-cyan-800 hover:text-white border-gray-200 rounded-md"
+                        className="text-blue-700 flex items-center gap-5 font-bold py-1.5 px-2 border hover:bg-cyan-800 hover:text-white border-gray-200 rounded-md"
                       >
                         <span>
                           <CiLogout className="text-xl" />
@@ -271,7 +271,7 @@ const Navbar = () => {
               <Link to="/login" className="btn btn-accent active:scale-95 text-sm md:text-base">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-info active:scale-95 text-sm md:text-base">
+              <Link to="/register" className="btn btn-info hidden md:block active:scale-95 py-2 text-sm md:text-base">
                 Register
               </Link>
             </div>

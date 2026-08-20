@@ -107,6 +107,7 @@ const AllProducts = () => {
                     <img
                       src={product.image}
                       alt={product.title}
+                      loading="lazy"
                       className="w-12 h-12 rounded-lg object-cover border"
                     />
                   </td>

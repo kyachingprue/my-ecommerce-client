@@ -93,8 +93,8 @@ const AllUsers = () => {
                     } hover:bg-gray-100 transition-colors duration-200`}
                 >
                   <td className="px-6 text-black py-3 font-semibold">{idx + 1}</td>
-                  <td className="px-6 text-black py-3">{user.email}</td>
-                  <td className="px-6 text-black py-3 capitalize font-semibold">
+                  <td className="px-6 text-cyan-900 text-sm md:text-base py-3">{user.email}</td>
+                  <td className="px-6 text-blue-800 py-3 capitalize font-semibold">
                     {user.role}
                   </td>
                   <td className="px-6 text-black py-3">

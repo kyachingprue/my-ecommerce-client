@@ -95,12 +95,12 @@ const Register = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
       style={{
         backgroundImage:
-          "url('https://i.ibb.co.com/7d9hHwY0/premium-photo-1669550788590-859353c91996.jpg')",
+          "url('https://i.ibb.co.com/7d9hHwY0/premium-photo-1669550788590-859353c91996.jpg')"
       }}
     >
       <div className="absolute inset-0 bg-black/40"></div>
 
-      <div className="relative z-10 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow-lg w-[450px] border border-white/30 text-white">
+      <div className="relative z-10 bg-white/20 backdrop-blur-md p-4 rounded-2xl shadow-lg mx-4 md:mx-0 w-full md:w-[450px] lg:w-[550px] border border-white/30 text-white">
         <h2 className="text-3xl font-bold text-center mb-4">
           Create Your Account 🌱
         </h2>
@@ -130,42 +130,44 @@ const Register = () => {
             />
           </div>
 
-          {/* Name */}
-          <div>
-            <label className="block mb-1 text-sm">Full Name</label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              {...register("name", { required: "Name is required" })}
-              className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
-            />
-            {errors.name && (
-              <p className="text-red-300 text-sm mt-1">
-                {errors.name.message}
-              </p>
-            )}
-          </div>
+          <div className="flex flex-col md:flex-row gap-2 justify-between w-full items-center">
+            {/* Name */}
+            <div className="w-full">
+              <label className="block mb-1 text-sm">Full Name</label>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                {...register('name', { required: 'Name is required' })}
+                className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              />
+              {errors.name && (
+                <p className="text-red-300 text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
 
-          {/* Email */}
-          <div>
-            <label className="block mb-1 text-sm">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Enter a valid email address",
-                },
-              })}
-              className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
-            />
-            {errors.email && (
-              <p className="text-red-300 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
+            {/* Email */}
+            <div className="w-full">
+              <label className="block mb-1 text-sm">Email</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: 'Enter a valid email address'
+                  }
+                })}
+                className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+              />
+              {errors.email && (
+                <p className="text-red-300 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Password */}
@@ -174,12 +176,12 @@ const Register = () => {
             <input
               type="password"
               placeholder="Create a password"
-              {...register("password", {
-                required: "Password is required",
+              {...register('password', {
+                required: 'Password is required',
                 minLength: {
                   value: 6,
-                  message: "Password must be at least 6 characters",
-                },
+                  message: 'Password must be at least 6 characters'
+                }
               })}
               className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
             />
@@ -196,10 +198,10 @@ const Register = () => {
             <input
               type="password"
               placeholder="Re-enter your password"
-              {...register("confirmPassword", {
-                required: "Please confirm your password",
-                validate: (value) =>
-                  value === password || "Passwords do not match",
+              {...register('confirmPassword', {
+                required: 'Please confirm your password',
+                validate: value =>
+                  value === password || 'Passwords do not match'
               })}
               className="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
             />
@@ -212,12 +214,12 @@ const Register = () => {
 
           {/* Register Button */}
 
-          <button className="w-full bg-green-500 hover:bg-green-600 mx-auto text-center transition-all py-2 rounded-md mt-4 disabled:opacity-70 disabled:cursor-not-allowed">
-            {
-              loading ? <Fan className="text-3xl text-black animate-spin mx-auto" />
-                :
-                <p className='text-black font-bold'>Register</p>
-            }
+          <button className="w-full hover:bg-blue-900 bg-green-900 mx-auto text-center transition-all py-2 rounded-md mt-4 disabled:opacity-70 disabled:cursor-not-allowed">
+            {loading ? (
+              <Fan className="text-3xl text-black animate-spin mx-auto" />
+            ) : (
+              <p className="text-white font-bold">Register</p>
+            )}
           </button>
         </form>
 
@@ -225,14 +227,14 @@ const Register = () => {
         <SocialLogin />
 
         <p className="text-sm text-center mt-4">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <a href="/login" className="text-green-300 hover:underline">
             Login
           </a>
         </p>
       </div>
     </div>
-  );
+  )
 };
 
 export default Register;

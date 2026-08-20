@@ -37,7 +37,7 @@ const SellerRequestsAdmin = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="p-5 bg-cyan-100 shadow-2xl rounded-md">
+    <div className="p-5 bg-gray-50 shadow-2xl rounded-md">
       <h2 className="text-2xl text-black font-semibold mb-6 w-10/12 md:w-2/12 border-b border-gray-500 pb-2">
         Seller Requests
       </h2>
@@ -48,7 +48,7 @@ const SellerRequestsAdmin = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full">
             {/* Table Header */}
-            <thead className="border-b border-gray-300">
+            <thead className="border-b border-gray-400 bg-white">
               <tr className="text-left text-gray-700">
                 <th className="py-2 px-3">Name</th>
                 <th className="py-2 px-3">Email</th>
@@ -63,7 +63,7 @@ const SellerRequestsAdmin = () => {
               {requests.map((req) => (
                 <tr
                   key={req._id}
-                  className="transition-colors hover:bg-gray-100 cursor-pointer"
+                  className="transition-colors hover:bg-cyan-200 shadow-md cursor-pointer"
                 >
                   <td className="py-2 text-black px-3">{req.name}</td>
                   <td className="py-2 text-black px-3">{req.email}</td>
