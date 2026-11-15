@@ -18,20 +18,56 @@ import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   useTitle("Sign in");
-
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     getValues,
+    setValue,
     trigger,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ defaultValues: { email: "", password: "" } });
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const { userLogin, resetPassword, loading, setLoading } = useAuth();
   const isBusy = loading || isSubmitting;
+
+  // Demo credentials are exposed in the browser bundle. Use only for local/demo
+  // environments; remove this list before deploying to production.
+  const demoAccounts = [
+    {
+      role: "User",
+      email: "kyachingpruemarma5@gmail.com",
+      password: "@Kyachingprue123",
+      description: "Shop and manage your orders",
+    },
+    {
+      role: "Seller",
+      email: "kyachingmarma413@gmail.com",
+      password: "123456",
+      description: "Manage products and sales",
+    },
+    {
+      role: "Admin",
+      email: "kyachingpruemarma.info@gmail.com",
+      password: "123456",
+      description: "Manage the marketplace",
+    },
+  ];
+
+  const selectDemoAccount = account => {
+    setValue("email", account.email, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+    setValue("password", account.password, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+    toast.success(`${account.role} demo credentials filled in`);
+  };
 
   const onSubmit = async data => {
     setLoading(true);
@@ -49,7 +85,6 @@ const Login = () => {
   const handlePasswordReset = async () => {
     const validEmail = await trigger("email");
     if (!validEmail) return;
-
     setLoading(true);
     try {
       await resetPassword(getValues("email").trim());
@@ -63,13 +98,13 @@ const Login = () => {
 
   const inputClassName =
     "w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-600/10";
-
   return (
     <main className="relative isolate overflow-hidden bg-[#f3f7f1] px-4 py-10 sm:px-6 sm:py-14">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 top-12 h-80 w-80 rounded-full bg-emerald-200/40 blur-3xl"
       />
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-36 bottom-0 h-96 w-96 rounded-full bg-lime-200/40 blur-3xl"
@@ -81,12 +116,14 @@ const Login = () => {
             aria-hidden="true"
             className="absolute -right-24 -top-20 h-80 w-80 rounded-full border-[42px] border-white/[0.04]"
           />
+
           <div
             aria-hidden="true"
             className="absolute -bottom-36 -left-24 h-96 w-96 rounded-full border-[54px] border-white/[0.04]"
           />
 
           <div className="relative">
+
             <Link to="/" className="inline-flex items-center gap-2.5">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
                 <Leaf size={22} strokeWidth={2.2} />
@@ -95,7 +132,7 @@ const Login = () => {
             </Link>
 
             <div className="mt-20">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs font-medium text-emerald-100">
+             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs font-medium text-emerald-100">
                 <Sparkles size={14} aria-hidden="true" />
                 Welcome back
               </span>
@@ -104,6 +141,7 @@ const Login = () => {
                 <br />
                 favorites await.
               </h1>
+
               <p className="mt-4 max-w-sm text-sm leading-7 text-emerald-100/75">
                 Sign in to pick up where you left off and make your next shop
                 feel effortless.
@@ -118,12 +156,15 @@ const Login = () => {
                   </p>
                   <p className="mt-1 text-sm font-semibold">Good food, ready to discover</p>
                 </div>
+
                 <div className="flex shrink-0 -space-x-2 text-2xl" aria-label="Fresh produce">
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#174633] bg-[#f1f8e9]">🥑</span>
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#174633] bg-[#fff3e0]">🍊</span>
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#174633] bg-[#fce4ec]">🍎</span>
                 </div>
+
               </div>
+
               <div className="mt-5 h-px bg-white/10" />
               <div className="mt-4 flex items-center gap-2 text-xs text-emerald-100/80">
                 <span className="h-2 w-2 rounded-full bg-lime-300" />
@@ -131,7 +172,6 @@ const Login = () => {
               </div>
             </div>
           </div>
-
           <div className="relative mt-12 space-y-3">
             {[
               "Your basket is just a few clicks away",
@@ -144,13 +184,13 @@ const Login = () => {
                 </span>
                 {benefit}
               </div>
+
             ))}
             <p className="pt-5 text-xs text-emerald-100/50">
               Better groceries. Better everyday.
             </p>
           </div>
         </aside>
-
         <section className="px-6 py-8 sm:px-10 sm:py-11 lg:px-12 xl:px-16">
           <Link to="/" className="mb-8 inline-flex items-center gap-2 text-lg font-bold text-emerald-900 lg:hidden">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
@@ -173,6 +213,38 @@ const Login = () => {
             </div>
 
             <SocialLogin />
+
+            {/* Demo role shortcuts */}
+            <div className="mt-6">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-slate-700">
+                  Quick demo login
+                </p>
+                <span className="text-xs text-slate-400">
+                  Select a role to fill the form
+                </span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                {demoAccounts.map(account => (
+                  <button
+                    key={account.role}
+                    type="button"
+                    onClick={() => selectDemoAccount(account)}
+                    disabled={isBusy}
+                    className="group rounded-xl border border-emerald-100 bg-emerald-50/70 px-2 py-3 text-center transition hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 focus:outline-none focus:ring-4 focus:ring-emerald-600/15 disabled:cursor-not-allowed disabled:opacity-60"
+                    aria-label={`Fill ${account.role} demo credentials`}
+                  >
+                    <span className="block text-sm font-bold text-emerald-900">
+                      {account.role}
+                    </span>
+                    <span className="mt-1 block text-[10px] leading-4 text-emerald-700">
+                      {account.description}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="my-6 flex items-center gap-4">
               <span className="h-px flex-1 bg-slate-200" />
@@ -216,7 +288,6 @@ const Login = () => {
                   </p>
                 )}
               </div>
-
               <div>
                 <div className="mb-1.5 flex items-center justify-between gap-3">
                   <label htmlFor="login-password" className="block text-sm font-medium text-slate-700">
@@ -260,7 +331,7 @@ const Login = () => {
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
+                 </button>
                 </div>
                 {errors.password && (
                   <p id="login-password-error" className="mt-1.5 text-xs text-rose-600">
@@ -268,7 +339,6 @@ const Login = () => {
                   </p>
                 )}
               </div>
-
               <button
                 type="submit"
                 disabled={isBusy}
@@ -291,7 +361,6 @@ const Login = () => {
                 )}
               </button>
             </form>
-
             <p className="mt-6 text-center text-sm text-slate-500">
               New to GreenBasket?{" "}
               <Link
