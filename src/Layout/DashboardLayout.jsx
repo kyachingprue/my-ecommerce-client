@@ -58,6 +58,7 @@ const workspaces = {
       { to: "/dashboard/admin/all-users", label: "Users", icon: <Users size={17} strokeWidth={1.9} /> },
       { to: "/dashboard/admin/all-sellers", label: "Sellers", icon: <Store size={17} strokeWidth={1.9} /> },
       { to: "/dashboard/admin/all-products", label: "Products", icon: <Package size={17} strokeWidth={1.9} /> },
+      { to: "/dashboard/admin/add-product", label: "Add product", icon: <CirclePlus size={17} strokeWidth={1.9} /> },
       { to: "/dashboard/admin/reports", label: "Reports & analytics", icon: <BarChart3 size={17} strokeWidth={1.9} /> },
       {
         to: "/dashboard/admin/seller-request-admin",

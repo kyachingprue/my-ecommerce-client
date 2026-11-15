@@ -1,128 +1,214 @@
-import React from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaUserTie, FaTrashAlt } from "react-icons/fa";
+import {
+  CircleAlert,
+  Clock3,
+  LoaderCircle,
+  RefreshCw,
+  Search,
+  Store,
+  Trash2,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+const formatDate = value => {
+  if (!value) return "Not available";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "Not available"
+    : date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+};
+
 const AllSellers = () => {
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
 
-  // Fetch all sellers
-  const { data: sellers = [], refetch, isLoading } = useQuery({
+  const {
+    data: sellers = [],
+    refetch,
+    isLoading,
+    isFetching,
+    isError,
+  } = useQuery({
     queryKey: ["allSellers"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-      // filter only sellers
-      return res.data.filter((user) => user.role === "seller");
+      return res.data.filter(user => user.role === "seller");
     },
+    retry: false,
   });
 
-  // Delete seller with confirmation
-  const handleDelete = (id) => {
-    toast.custom((t) => (
-      <div
-        className={`bg-white border shadow-lg rounded-xl p-5 flex flex-col items-center gap-3 transition-all w-[280px] ${t.visible ? "opacity-100 scale-100" : "opacity-0 scale-90"
-          }`}
-      >
-        <p className="text-gray-700 font-medium text-center">
-          Are you sure you want to delete this seller?
-        </p>
-        <div className="flex gap-3 mt-2">
-          <button
-            onClick={async () => {
-              toast.dismiss(t.id);
-              try {
-                const res = await axiosSecure.delete(`/users/${id}`);
-                if (res.data.deletedCount > 0) {
-                  toast.success("Seller deleted successfully!");
-                  refetch();
-                } else {
-                  toast.error("Failed to delete seller.");
-                }
-              } catch (err) {
-                console.error(err);
-                toast.error("Failed to delete seller");
-              }
-            }}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg transition"
-          >
-            Confirm
-          </button>
+  const filteredSellers = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return sellers;
+    return sellers.filter(seller =>
+      `${seller.name || ""} ${seller.email || ""}`.toLowerCase().includes(query)
+    );
+  }, [sellers, search]);
 
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded-lg transition"
-          >
-            Cancel
-          </button>
+  const handleDelete = id => {
+    toast(
+      confirmation => (
+        <div className="space-y-3">
+          <p className="text-sm font-semibold text-slate-800">
+            Remove this seller account?
+          </p>
+          <div className="flex justify-end gap-2">
+            <button type="button" onClick={() => toast.dismiss(confirmation.id)} className="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100">
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={async () => {
+                toast.dismiss(confirmation.id);
+                try {
+                  const response = await axiosSecure.delete(`/users/${id}`);
+                  if (response.data.deletedCount > 0) {
+                    toast.success("Seller account removed.");
+                    await refetch();
+                  } else {
+                    toast.error("The seller account could not be removed.");
+                  }
+                } catch (error) {
+                  toast.error(error.response?.data?.message || "Could not remove the seller account.");
+                }
+              }}
+              className="rounded-lg bg-rose-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-rose-700"
+            >
+              Remove seller
+            </button>
+          </div>
         </div>
-      </div>
-    ));
+      ),
+      { duration: Infinity }
+    );
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[70vh]">
-        <div className="animate-spin rounded-full h-14 w-14 border-t-4 border-purple-500 border-solid"></div>
-      </div>
-    );
-  }
+  if (isLoading) return <div className="flex min-h-[50vh] items-center justify-center"><LoaderCircle className="animate-spin text-emerald-700" size={32} /></div>;
 
   return (
-    <div className="p-5 min-h-screen bg-gray-50">
-      <h2 className="text-3xl font-bold text-gray-700 mb-6">All Sellers</h2>
+    <section className="min-h-[calc(100vh-9rem)] space-y-6 text-slate-800">
+      <header className="overflow-hidden rounded-3xl bg-gradient-to-br from-violet-950 via-emerald-950 to-emerald-800 p-5 text-white shadow-xl shadow-emerald-950/10 sm:p-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-50">
+              <Store size={14} />
+              Partner directory
+            </span>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">Sellers</h2>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-emerald-50/80 sm:text-base">
+              View seller accounts and manage access to the marketplace.
+            </p>
+          </div>
+          <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto">
+            <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-white focus-within:ring-2 focus-within:ring-white/40 sm:min-w-64 lg:flex-none">
+              <Search size={17} className="shrink-0 text-emerald-100/70" />
+              <input
+                type="search"
+                value={search}
+                onChange={event => setSearch(event.target.value)}
+                placeholder="Search sellers"
+                aria-label="Search sellers"
+                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-emerald-100/60"
+              />
+            </label>
+            <button
+              type="button"
+              onClick={() => refetch()}
+              disabled={isFetching}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/20 disabled:opacity-70"
+            >
+              <RefreshCw size={16} className={isFetching ? "animate-spin" : ""} />
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div className="mt-7 grid grid-cols-2 gap-3 sm:max-w-md">
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <p className="text-xs font-medium text-emerald-50/75">Active sellers</p>
+            <p className="mt-1 text-2xl font-bold">{sellers.length}</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <p className="text-xs font-medium text-emerald-50/75">Search results</p>
+            <p className="mt-1 text-2xl font-bold">{filteredSellers.length}</p>
+          </div>
+        </div>
+      </header>
 
-      {sellers.length === 0 ? (
-        <p className="text-center text-gray-600 py-10">No sellers found.</p>
+      {isError ? (
+        <div className="rounded-3xl border border-rose-100 bg-white px-5 py-12 text-center shadow-sm">
+          <CircleAlert className="mx-auto text-rose-600" size={28} />
+          <h3 className="mt-4 font-bold text-slate-900">Seller list couldn’t load</h3>
+          <p className="mt-2 text-sm text-slate-500">Please check the server and try again.</p>
+          <button type="button" onClick={() => refetch()} className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-800">
+            <RefreshCw size={16} /> Try again
+          </button>
+        </div>
+      ) : filteredSellers.length === 0 ? (
+        <div className="rounded-3xl border border-slate-100 bg-white px-5 py-14 text-center shadow-sm">
+          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50 text-violet-700">
+            <Store size={26} />
+          </span>
+          <h3 className="mt-4 text-lg font-bold text-slate-900">
+            {search ? "No matching sellers" : "No sellers yet"}
+          </h3>
+          <p className="mt-2 text-sm text-slate-500">
+            {search ? "Try another name or email address." : "Approved seller accounts will appear here."}
+          </p>
+        </div>
       ) : (
-        <div className="overflow-x-auto bg-white shadow-lg rounded-2xl border border-gray-200">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-purple-600 text-white uppercase text-xs tracking-wider">
-              <tr>
-                <th className="px-6 py-3">#</th>
-                <th className="px-6 py-3">Email</th>
-                <th className="px-6 py-3">Role</th>
-                <th className="px-6 py-3">Created At</th>
-                <th className="px-6 py-3">Last Login</th>
-                <th className="px-6 py-3 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sellers.map((seller, idx) => (
-                <tr
-                  key={seller._id}
-                  className={`${idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    } hover:bg-gray-100 transition-colors duration-200`}
+        <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+          {filteredSellers.map(seller => {
+            const name = seller.name || seller.email || "GreenBasket seller";
+            const photo = seller.profileImage || seller.photo;
+            return (
+              <article key={seller._id} className="min-w-0 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-900/5">
+                <div className="flex items-start gap-3">
+                  <span className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-violet-50 font-bold text-violet-800">
+                    {(name.trim()[0] || "S").toUpperCase()}
+                    {photo && (
+                      <img src={photo} alt="" onError={event => { event.currentTarget.style.display = "none"; }} className="absolute inset-0 h-full w-full object-cover" />
+                    )}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-bold text-slate-900" title={name}>{name}</p>
+                    <p className="mt-1 break-all text-sm text-slate-500">{seller.email}</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-violet-50 px-2.5 py-1 text-[11px] font-semibold capitalize text-violet-800">
+                    {seller.role || "seller"}
+                  </span>
+                </div>
+
+                <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+                  <div>
+                    <p className="text-xs text-slate-400">Joined</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-700">{formatDate(seller.created_at)}</p>
+                  </div>
+                  <div>
+                    <p className="flex items-center gap-1 text-xs text-slate-400"><Clock3 size={12} /> Last active</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-700">{formatDate(seller.last_login || seller.lasted_login)}</p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleDelete(seller._id)}
+                  aria-label={`Remove ${name}`}
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-100 px-3 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/40"
                 >
-                  <td className="px-6 py-3 text-black font-semibold">{idx + 1}</td>
-                  <td className="px-6 py-3 flex items-center gap-2">
-                    <FaUserTie className="text-purple-500" />
-                    <span className="text-black">{seller.email}</span>
-                  </td>
-                  <td className="px-6 py-3 text-black capitalize font-semibold">
-                    {seller.role}
-                  </td>
-                  <td className="px-6 text-black py-3">
-                    {new Date(seller.created_at).toLocaleString()}
-                  </td>
-                  <td className="px-6 text-black py-3">
-                    {new Date(seller.lasted_login).toLocaleString()}
-                  </td>
-                  <td className="px-6 py-3 text-center flex justify-center gap-2">
-                    <button
-                      onClick={() => handleDelete(seller._id)}
-                      className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg flex items-center gap-1 transition"
-                    >
-                      <FaTrashAlt /> Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  <Trash2 size={16} /> Remove seller
+                </button>
+              </article>
+            );
+          })}
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

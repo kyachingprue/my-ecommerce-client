@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import useRole from "../../../Hooks/useRole";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
@@ -10,10 +12,12 @@ const AddProduct = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
   const { user } = useAuth();
+  const { role } = useRole();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -34,7 +38,10 @@ const AddProduct = () => {
         },
         description: data.description,
         image: data.image,
-        tags: data.tags.split(",").map((tag) => tag.trim()), // comma separated tags
+        tags: (data.tags || "")
+          .split(",")
+          .map(tag => tag.trim())
+          .filter(Boolean),
         rating: parseFloat(data.rating) || 0,
         reviewsCount: parseInt(data.reviewsCount) || 0,
         origin: data.origin,
@@ -45,24 +52,32 @@ const AddProduct = () => {
 
       const res = await axiosSecure.post("/products", newProduct);
       if (res.data.insertedId) {
-        toast.success("✅ Product added successfully!");
-        navigate('/dashboard/seller/products')
+        await queryClient.invalidateQueries({ queryKey: ["allProducts"] });
+        toast.success("Product added successfully.");
+        navigate(role === "admin" ? "/dashboard/admin/all-products" : "/dashboard/seller/products");
         reset();
       }
     } catch (err) {
-      console.error(err);
-      toast.error("❌ Failed to add product!");
+      toast.error(err.response?.data?.message || "Failed to add product.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 px-1 md:px-4">
-      <div className="w-11/12 md:w-10/12 mx-auto bg-white/90 backdrop-blur-md p-3 md:p-8 rounded-2xl shadow-2xl border border-green-200">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-center text-green-700 mb-8">
-          🌿 Add New Product
-        </h2>
+    <div className="min-h-[calc(100vh-9rem)] rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-lime-50 px-3 py-5 sm:px-6 sm:py-8">
+      <div className="mx-auto max-w-5xl rounded-3xl border border-emerald-100 bg-white p-5 shadow-xl shadow-emerald-950/5 sm:p-8">
+        <div className="mb-8">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">
+            {role === "admin" ? "Admin workspace" : "Seller workspace"}
+          </p>
+          <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl">
+            Add a product
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-slate-500">
+            Add product details so customers can discover and order it.
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {/* Title */}
           <div>
             <label className="font-semibold text-gray-700">Title</label>
@@ -245,9 +260,10 @@ const AddProduct = () => {
           <div className="md:col-span-2 mt-6">
             <button
               type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-md md:text-lg tracking-wide shadow-lg transition-transform transform hover:scale-[1.02]"
+              disabled={isSubmitting}
+              className="w-full rounded-xl bg-emerald-700 py-3 text-base font-bold tracking-wide text-white shadow-lg shadow-emerald-900/10 transition hover:-translate-y-0.5 hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-60 md:text-lg"
             >
-              🌿 Add Product
+              {isSubmitting ? "Adding product..." : "Add product"}
             </button>
           </div>
         </form>

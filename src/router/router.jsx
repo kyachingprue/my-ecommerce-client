@@ -17,6 +17,7 @@ import ProfilePage from "../pages/Dashboard/User/ProfilePage";
 import ProductTracking from "../pages/Dashboard/User/ProductTracking";
 import MyProducts from "../pages/Dashboard/Seller/MyProducts";
 import AddProduct from "../pages/Dashboard/Seller/AddProduct";
+import SellerProductManager from "../pages/Dashboard/Seller/SellerProductManager";
 import CustomerOrders from "../pages/Dashboard/Seller/CustomerOrders";
 import SalesAnalytics from "../pages/Dashboard/Seller/SalesAnalytics";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers";
@@ -93,11 +94,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'seller/add-product',
-        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+        element: <SellerRoute><SellerProductManager pageTitle="Add a product"></SellerProductManager></SellerRoute>
       },
       {
         path: 'seller/orders',
-        element: <CustomerOrders></CustomerOrders>
+        element: <SellerRoute><CustomerOrders></CustomerOrders></SellerRoute>
       },
       {
         path: 'seller/analytics',
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
       {
         path: 'admin/all-products',
         element: <AdminRoute><AllProducts></AllProducts></AdminRoute>
+      },
+      {
+        path: 'admin/add-product',
+        element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
       },
       {
         path: 'admin/update-product/:id',
