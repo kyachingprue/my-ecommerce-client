@@ -122,6 +122,10 @@ const router = createBrowserRouter([
         element: <AdminRoute><AllProducts></AllProducts></AdminRoute>
       },
       {
+        path: 'admin/orders',
+        element: <AdminRoute><CustomerOrders isAdmin></CustomerOrders></AdminRoute>
+      },
+      {
         path: 'admin/add-product',
         element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
       },

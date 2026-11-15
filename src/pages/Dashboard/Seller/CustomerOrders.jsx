@@ -15,11 +15,21 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
-const orderStatuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
+const orderStatuses = [
+  "confirmed",
+  "processing",
+  "packaging",
+  "shipped",
+  "out for delivery",
+  "delivered",
+  "cancelled",
+];
 
 const statusClass = status => {
   switch (String(status || "pending").toLowerCase()) {
     case "delivered":
+      return "bg-emerald-50 text-emerald-800";
+    case "confirmed":
       return "bg-emerald-50 text-emerald-800";
     case "shipped":
       return "bg-sky-50 text-sky-800";
@@ -32,7 +42,7 @@ const statusClass = status => {
   }
 };
 
-const CustomerOrders = () => {
+const CustomerOrders = ({ isAdmin = false }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
@@ -46,14 +56,16 @@ const CustomerOrders = () => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["sellerOrders", user?.email],
+    queryKey: isAdmin ? ["adminOrders"] : ["sellerOrders", user?.email],
     queryFn: async () => {
-      const response = await axiosSecure.get(
-        `/seller-orders/${encodeURIComponent(user.email)}`
-      );
+      const response = isAdmin
+        ? await axiosSecure.get("/admin-orders")
+        : await axiosSecure.get(
+            `/seller-orders/${encodeURIComponent(user.email)}`
+          );
       return response.data.data;
     },
-    enabled: !!user?.email,
+    enabled: isAdmin || !!user?.email,
     retry: false,
   });
 
@@ -66,7 +78,10 @@ const CustomerOrders = () => {
       if (response.modifiedCount > 0 || response.matchedCount > 0) {
         toast.success(`Order updated to ${variables.status}.`);
         await queryClient.invalidateQueries({
-          queryKey: ["sellerOrders", user.email],
+          queryKey: isAdmin ? ["adminOrders"] : ["sellerOrders", user.email],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["trackedProducts"],
         });
       } else {
         toast.error("The order status was not updated.");
@@ -84,7 +99,7 @@ const CustomerOrders = () => {
       const matchesStatus = statusFilter === "all" || status === statusFilter;
       const matchesSearch =
         !query ||
-        `${order.user_email || ""} ${order.productTitle || ""} ${order.productId || ""}`
+        `${order.user_email || ""} ${order.seller_email || ""} ${order.productTitle || ""} ${order.productId || ""}`
           .toLowerCase()
           .includes(query);
       return matchesStatus && matchesSearch;
@@ -113,13 +128,15 @@ const CustomerOrders = () => {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-50">
               <Truck size={14} />
-              Seller workspace
+              {isAdmin ? "Admin workspace" : "Seller workspace"}
             </span>
             <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
-              Customer orders
+              {isAdmin ? "All customer orders" : "Customer orders"}
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-6 text-emerald-50/80 sm:text-base">
-              Review incoming orders and keep customers updated as you fulfill them.
+              {isAdmin
+                ? "Review paid marketplace orders and manage their delivery tracking."
+                : "Review paid orders for your products and keep customers updated as you fulfill them."}
             </p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:flex-row xl:w-auto">
@@ -199,9 +216,13 @@ const CustomerOrders = () => {
           <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-800">
             <ShoppingBag size={29} />
           </span>
-          <h3 className="mt-5 text-xl font-bold text-slate-900">No customer orders yet</h3>
+          <h3 className="mt-5 text-xl font-bold text-slate-900">
+            {isAdmin ? "No paid orders yet" : "No paid customer orders yet"}
+          </h3>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-500">
-            When customers order your products, you’ll be able to manage fulfillment here.
+            {isAdmin
+              ? "Successful customer payments will appear here for tracking."
+              : "Successful payments for your products will appear here for fulfillment."}
           </p>
         </div>
       ) : filteredOrders.length === 0 ? (
@@ -239,6 +260,11 @@ const CustomerOrders = () => {
                   <p className="mt-1 break-all text-sm text-slate-500">
                     Customer: {order.user_email || "Not specified"}
                   </p>
+                  {isAdmin && (
+                    <p className="mt-1 break-all text-sm text-slate-500">
+                      Seller: {order.seller_email || "Not specified"}
+                    </p>
+                  )}
                   <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
                     <span>Qty: {order.quantity || 1}</span>
                     <span className="font-semibold text-emerald-800">
@@ -259,7 +285,7 @@ const CustomerOrders = () => {
                   <Eye size={16} /> View product
                 </Link>
                 <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                  Update status
+                  Update tracking
                   <select
                     value={order.status || "pending"}
                     onChange={event =>

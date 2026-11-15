@@ -19,6 +19,7 @@ import LoadingSpinner from "../../../components/LoadingSpinner";
 const trackingSteps = [
   "Pending",
   "Confirmed",
+  "Processing",
   "Packaging",
   "Shipped",
   "Out for delivery",
