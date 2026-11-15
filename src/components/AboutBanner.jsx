@@ -1,142 +1,141 @@
-import React from 'react'
-import { motion } from 'motion/react'
-import { FaLeaf, FaTruck, FaUsers } from 'react-icons/fa'
+import { motion as Motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FaLeaf, FaTruck, FaUsers } from "react-icons/fa";
 
-const AboutBanner = () => {
-  return (
-    <section className="relative overflow-hidden rounded-xl bg-[#052e1b] text-white py-24 px-4 md:px-10 lg:px-16">
-      {/* Background Image */}
-      <img
-        src="https://images.unsplash.com/photo-1524594157369-7d8b9c0d1a7d?q=80&w=1600&auto=format&fit=crop"
-        alt="about background"
-        className="absolute inset-0 w-full h-full object-cover opacity-20"
-      />
+const highlights = [
+  {
+    icon: <FaLeaf aria-hidden="true" />,
+    title: "Thoughtful selection",
+    description: "Everyday groceries chosen with care.",
+  },
+  {
+    icon: <FaTruck aria-hidden="true" />,
+    title: "Convenient delivery",
+    description: "Order fresh essentials from home.",
+  },
+  {
+    icon: <FaUsers aria-hidden="true" />,
+    title: "A local marketplace",
+    description: "Connecting shoppers with local sellers.",
+  },
+];
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#052e1b] via-[#064e3b]/90 to-[#052e1b]" />
+const AboutBanner = () => (
+  <section className="relative isolate overflow-hidden rounded-[1.5rem] bg-[#052e1b] px-4 py-12 text-white shadow-2xl shadow-emerald-950/15 sm:rounded-[2rem] sm:px-8 sm:py-16 lg:px-14 lg:py-20">
+    <img
+      src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop"
+      alt=""
+      aria-hidden="true"
+      fetchPriority="high"
+      className="absolute inset-0 -z-20 h-full w-full object-cover opacity-20"
+    />
+    <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#052e1b]/95 via-emerald-950/90 to-emerald-800/75" />
+    <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-lime-400/20 blur-3xl sm:h-96 sm:w-96" />
+    <div className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-emerald-300/20 blur-3xl sm:h-96 sm:w-96" />
 
-      {/* Floating Glow */}
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-green-500/20 blur-[140px]" />
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-emerald-400/20 blur-[120px]" />
+    <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <div>
+        <Motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 rounded-full border border-emerald-200/20 bg-white/10 px-4 py-2 text-sm font-medium text-emerald-100 backdrop-blur"
+        >
+          <FaLeaf aria-hidden="true" />
+          About GreenBasket
+        </Motion.div>
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* LEFT CONTENT */}
-        <div>
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-400/20 text-green-300 text-sm"
+        <Motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+        >
+          Good food,
+          <span className="block bg-gradient-to-r from-lime-200 via-emerald-200 to-teal-100 bg-clip-text text-transparent">
+            a greener way to shop.
+          </span>
+        </Motion.h1>
+
+        <Motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="mt-5 max-w-2xl text-sm leading-7 text-emerald-50/80 sm:text-base"
+        >
+          GreenBasket brings fresh groceries and trusted local sellers together
+          in one simple marketplace. We make it easier to find quality food for
+          your everyday table.
+        </Motion.p>
+
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Link
+            to="/products"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-lime-300 px-5 text-sm font-bold text-emerald-950 shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-lime-200 focus:outline-none focus:ring-4 focus:ring-lime-200/30"
           >
-            <FaLeaf />
-            About GreenBasket
-          </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-black leading-tight mt-6"
+            Explore products
+            <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+          <a
+            href="#our-mission"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
           >
-            We Deliver
-            <span className="block text-green-400">Fresh Organic Life</span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-gray-300 mt-6 leading-relaxed text-sm md:text-lg max-w-xl"
-          >
-            GreenBasket is a modern e-commerce platform dedicated to providing
-            fresh, organic, and healthy groceries directly from trusted farmers.
-            We focus on quality, sustainability, and fast delivery to improve
-            your everyday lifestyle.
-          </motion.p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mt-10">
-            {[
-              ['50K+', 'Happy Customers'],
-              ['1K+', 'Organic Products'],
-              ['24/7', 'Fast Delivery']
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-xl"
-              >
-                <h3 className="text-2xl font-bold text-green-400">{item[0]}</h3>
-                <p className="text-xs text-gray-400 mt-1">{item[1]}</p>
-              </div>
-            ))}
-          </div>
+            Our mission
+          </a>
         </div>
 
-        {/* RIGHT CONTENT - 3D CARDS */}
-        <div className="relative flex justify-center lg:justify-end">
-          {/* Main Card */}
-          <motion.div
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="w-full max-w-md rounded-[35px] bg-white/5 border border-white/10 backdrop-blur-2xl p-8 shadow-2xl"
-          >
-            <h2 className="text-2xl font-bold text-white mb-6">
-              Why Choose Us?
-            </h2>
-
-            {/* Feature 1 */}
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400">
-                <FaLeaf />
-              </div>
-              <div>
-                <h3 className="font-semibold">100% Organic</h3>
-                <p className="text-sm text-gray-400">
-                  Fresh products directly from farms.
-                </p>
-              </div>
+        <div className="mt-9 grid grid-cols-3 gap-2 sm:mt-10 sm:gap-4">
+          {[
+            ["50K+", "Happy customers"],
+            ["1K+", "Organic products"],
+            ["24/7", "Online shopping"],
+          ].map(([value, label]) => (
+            <div
+              key={label}
+              className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center backdrop-blur sm:p-4"
+            >
+              <p className="text-xl font-extrabold text-lime-200 sm:text-2xl">{value}</p>
+              <p className="mt-1 text-[10px] leading-4 text-emerald-50/70 sm:text-xs">{label}</p>
             </div>
-
-            {/* Feature 2 */}
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
-                <FaTruck />
-              </div>
-              <div>
-                <h3 className="font-semibold">Fast Delivery</h3>
-                <p className="text-sm text-gray-400">
-                  Get groceries delivered within hours.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400">
-                <FaUsers />
-              </div>
-              <div>
-                <h3 className="font-semibold">Trusted by Thousands</h3>
-                <p className="text-sm text-gray-400">
-                  Loved by customers across the country.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Floating Glow Ball */}
-          <motion.div
-            animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity }}
-            className="absolute -top-10 -right-10 w-40 h-40 bg-green-400/20 blur-3xl rounded-full"
-          />
+          ))}
         </div>
       </div>
-    </section>
-  )
-}
 
-export default AboutBanner
+      <Motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7 }}
+        className="relative mx-auto w-full max-w-xl rounded-[1.75rem] border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/15 backdrop-blur-xl sm:p-7"
+      >
+        <div className="mb-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-200">
+            Our promise
+          </p>
+          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+            Shopping that feels closer to home.
+          </h2>
+        </div>
+        <div className="space-y-4">
+          {highlights.map(item => (
+            <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-slate-950/15 p-3 sm:gap-4 sm:p-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-lime-200/20 to-emerald-300/20 text-lg text-lime-200">
+                {item.icon}
+              </span>
+              <span className="min-w-0">
+                <span className="block font-semibold text-white">{item.title}</span>
+                <span className="mt-1 block text-sm leading-5 text-emerald-50/70">{item.description}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5 text-sm text-emerald-50/70">
+          <span className="h-2.5 w-2.5 rounded-full bg-lime-300 shadow-[0_0_16px_rgba(190,242,100,0.8)]" />
+          A thoughtful way to fill your basket.
+        </div>
+      </Motion.div>
+    </div>
+  </section>
+);
+
+export default AboutBanner;

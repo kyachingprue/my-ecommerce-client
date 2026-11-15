@@ -1,5 +1,11 @@
 # React + Vite
 
+## Authentication
+
+Email/password registration, login, and password reset use Firebase Authentication. Configure the existing `VITE_apiKey`, `VITE_authDomain`, `VITE_projectId`, `VITE_storageBucket`, `VITE_messagingSenderId`, and `VITE_appId` environment variables for the Firebase project, and enable the Email/Password provider in Firebase Console.
+
+MongoDB stores user profile data only: name, email, profile image, role, address, phone, and bio. New profile fields default to empty strings (except role, which defaults to `user`). Passwords are managed by Firebase and are not sent to or stored in MongoDB.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

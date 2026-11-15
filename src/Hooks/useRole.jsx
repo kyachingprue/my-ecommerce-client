@@ -23,7 +23,12 @@ const useRole = () => {
     },
   });
 
-  return { role: roleData.role || "user", roleLoading, isError };
+  return {
+    role: roleData.role || "user",
+    userData: roleData,
+    roleLoading,
+    isError,
+  };
 };
 
 export default useRole;

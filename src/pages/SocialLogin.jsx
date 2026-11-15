@@ -24,19 +24,13 @@ const SocialLogin = () => {
         photoURL: user.photoURL,
       });
 
-      // Prepare user data for backend
       const userInfo = {
         email: user.email,
-        name: user.displayName,
-        photo: user.photoURL,
-        role: "user",
-        created_at: new Date().toISOString(),
-        last_login: new Date().toISOString(),
+        name: user.displayName || user.email.split("@")[0],
+        profileImage: user.photoURL || "",
       };
 
-      // ✅ Save user in DB
-      const userRes = await axiosInstance.post("/users", userInfo);
-      console.log("User saved:", userRes.data);
+      await axiosInstance.post("/users", userInfo);
 
       toast.success(`Welcome ${user.displayName}! 🎉`);
       navigate("/");
@@ -49,14 +43,11 @@ const SocialLogin = () => {
   };
 
   return (
-    <div className="mt-4">
+    <div>
       <button
         onClick={handleGoogleLogin}
         disabled={loading}
-        className={`flex items-center justify-center gap-2 w-full py-2 bg-white text-gray-800 font-semibold rounded-md shadow hover:shadow-lg transition-all ${loading
-          ? "cursor-not-allowed opacity-50 hover:bg-white hover:shadow"
-          : "hover:bg-gray-100"
-          }`}
+        className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? (
           <span className="animate-spin border-2 border-gray-300 border-t-gray-800 rounded-full w-5 h-5"></span>

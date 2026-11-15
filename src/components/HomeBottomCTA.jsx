@@ -1,5 +1,6 @@
 import React from 'react'
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import {
   FaLeaf,
   FaShippingFast,
@@ -38,7 +39,7 @@ const HomeBottomCTA = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Main Card */}
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -72,18 +73,26 @@ const HomeBottomCTA = () => {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <motion.button
+                <Motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group h-14 px-7 rounded-2xl bg-green-500 hover:bg-green-400 transition-all duration-300 font-semibold text-white flex items-center justify-center gap-3 shadow-lg shadow-green-500/20"
+                  className="rounded-2xl shadow-lg shadow-green-500/20"
                 >
-                  Start Shopping
-                  <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
-                </motion.button>
+                  <Link
+                    to="/products"
+                    className="group flex h-14 items-center justify-center gap-3 rounded-2xl bg-green-500 px-7 font-semibold text-white transition-all duration-300 hover:bg-green-400"
+                  >
+                    Start Shopping
+                    <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </Motion.div>
 
-                <button className="h-14 px-7 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 text-white font-medium">
+                <Link
+                  to="/products"
+                  className="flex h-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-7 font-medium text-white transition-all duration-300 hover:bg-white/10"
+                >
                   Explore Categories
-                </button>
+                </Link>
               </div>
 
               {/* Stats */}
@@ -110,7 +119,7 @@ const HomeBottomCTA = () => {
             </div>
 
             {/* RIGHT SIDE */}
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
@@ -126,7 +135,7 @@ const HomeBottomCTA = () => {
                 />
 
                 {/* Floating Card */}
-                <motion.div
+                <Motion.div
                   animate={{
                     y: [0, -10, 0]
                   }}
@@ -157,15 +166,15 @@ const HomeBottomCTA = () => {
                       </div>
                     </div>
 
-                    <button className="h-12 px-5 rounded-2xl bg-green-500 hover:bg-green-400 transition-all duration-300 text-white font-semibold">
+                    <Link to="/products" className="inline-flex h-12 items-center rounded-2xl bg-green-500 px-5 font-semibold text-white transition-all duration-300 hover:bg-green-400">
                       Buy Now
-                    </button>
+                    </Link>
                   </div>
-                </motion.div>
+                </Motion.div>
               </div>
 
               {/* Floating Feature Card */}
-              <motion.div
+              <Motion.div
                 animate={{
                   y: [0, 12, 0]
                 }}
@@ -188,15 +197,15 @@ const HomeBottomCTA = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </Motion.div>
+            </Motion.div>
           </div>
-        </motion.div>
+        </Motion.div>
 
         {/* FEATURES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {features.map((feature, index) => (
-            <motion.div
+            <Motion.div
               key={feature.id}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -217,11 +226,11 @@ const HomeBottomCTA = () => {
                 {feature.desc}
               </p>
 
-              <button className="mt-6 flex items-center gap-2 text-green-400 font-semibold group-hover:gap-3 transition-all duration-300">
+              <Link to="/about" className="mt-6 flex items-center gap-2 text-green-400 font-semibold group-hover:gap-3 transition-all duration-300">
                 Learn More
                 <FaArrowRight />
-              </button>
-            </motion.div>
+              </Link>
+            </Motion.div>
           ))}
         </div>
       </div>

@@ -1,41 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthContext from '../Context/AuthContext';
 import auth from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password)
+    try {
+      return await createUserWithEmailAndPassword(auth, email, password);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const userLogin = (email, password) => {
+  const userLogin = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    try {
+      return await signInWithEmailAndPassword(auth, email, password);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const profileUpdate = (profile) => {
+  const resetPassword = async (email) => {
+    setLoading(true);
+    try {
+      return await sendPasswordResetEmail(auth, email);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const profileUpdate = async (profile) => {
     setLoading(true)
-    return updateProfile(auth.currentUser, profile);
+    try {
+      return await updateProfile(auth.currentUser, profile);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const googleLogin = () => {
+  const googleLogin = async () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider)
+    try {
+      return await signInWithPopup(auth, googleProvider);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const logout = () => {
+  const logout = async () => {
     setLoading(true)
-    return signOut(auth)
+    try {
+      return await signOut(auth);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      console.log('user data-->', currentUser);
       setUser(currentUser);
       setLoading(false);
     })
@@ -52,6 +80,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     createUser,
     userLogin,
+    resetPassword,
     profileUpdate,
     logout,
     googleLogin
